@@ -1,0 +1,6 @@
+<decoder name="ufw-block">
+  <parent>kernel</parent>
+  <prematch>UFW BLOCK</prematch>
+  <regex offset="after_prematch">SRC=(\S+) DST=(\S+) LEN=\d+ TOS=\S+ PREC=\S+ TTL=\d+ ID=\d+ \S* PROTO=(\S+) SPT=(\d+) DPT=(\d+)</regex>
+  <order>srcip, dstip, protocol, srcport, dstport</order>
+</decoder>

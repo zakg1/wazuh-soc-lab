@@ -1,0 +1,20 @@
+<group name="local,syslog,ufw,">
+
+  <rule id="100100" level="3">
+    <decoded_as>kernel</decoded_as>
+    <match>UFW BLOCK</match>
+    <description>UFW blocked a connection from $(srcip) to port $(dstport)</description>
+    <group>firewall,</group>
+  </rule>
+
+  <rule id="100101" level="10" frequency="8" timeframe="20">
+    <if_matched_sid>100100</if_matched_sid>
+    <same_source_ip />
+    <description>Possible port scan from $(srcip): 8+ blocked ports in 20s</description>
+    <mitre>
+      <id>T1046</id>
+    </mitre>
+    <group>firewall,recon,</group>
+  </rule>
+
+</group>
